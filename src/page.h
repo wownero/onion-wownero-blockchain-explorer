@@ -583,7 +583,7 @@ public:
             crypto::hash blk_hash = core_storage->get_block_id_by_height(i);
 
             // get block size in kB
-            double blk_size = static_cast<double>(core_storage->get_db().get_block_size(i))/1024.0;
+            double blk_size = static_cast<double>(core_storage->get_db().get_block_weight(i))/1024.0;
 
             string blk_size_str = fmt::format("{:0.2f}", blk_size);
 
@@ -716,8 +716,8 @@ public:
                 // get all transactions in the block found
                 // initialize the first list with transaction for solving
                 // the block i.e. coinbase.
-                list<cryptonote::transaction> blk_txs {blk.miner_tx};
-                list<crypto::hash> missed_txs;
+                vector<cryptonote::transaction> blk_txs {blk.miner_tx};
+                vector<crypto::hash> missed_txs;
 
                 if (!core_storage->get_transactions(blk.tx_hashes, blk_txs, missed_txs))
                 {
@@ -1157,7 +1157,7 @@ public:
         }
 
         // get block size in bytes
-        uint64_t blk_size = core_storage->get_db().get_block_size(_blk_height);
+        uint64_t blk_size = core_storage->get_db().get_block_weight(_blk_height);
 
         // miner reward tx
         transaction coinbase_tx = blk.miner_tx;
@@ -4293,7 +4293,7 @@ public:
 
 
         // get block size in bytes
-        uint64_t blk_size = core_storage->get_db().get_block_size(block_height);
+        uint64_t blk_size = core_storage->get_db().get_block_weight(block_height);
 
         // miner reward tx
         transaction coinbase_tx = blk.miner_tx;
@@ -4522,7 +4522,7 @@ public:
             }
 
             // get block size in bytes
-            double blk_size = core_storage->get_db().get_block_size(i);
+            double blk_size = core_storage->get_db().get_block_weight(i);
 
             crypto::hash blk_hash = core_storage->get_block_id_by_height(i);
 
@@ -4541,8 +4541,8 @@ public:
 
             json& j_txs = j_blocks.back()["txs"];
 
-            list<cryptonote::transaction> blk_txs {blk.miner_tx};
-            list<crypto::hash> missed_txs;
+            vector<cryptonote::transaction> blk_txs {blk.miner_tx};
+            vector<crypto::hash> missed_txs;
 
             if (!core_storage->get_transactions(blk.tx_hashes, blk_txs, missed_txs))
             {
@@ -5107,8 +5107,8 @@ public:
             }
 
             // get transactions in the given block
-            list <cryptonote::transaction> blk_txs{blk.miner_tx};
-            list <crypto::hash> missed_txs;
+            vector <cryptonote::transaction> blk_txs{blk.miner_tx};
+            vector <crypto::hash> missed_txs;
 
             if (!core_storage->get_transactions(blk.tx_hashes, blk_txs, missed_txs))
             {

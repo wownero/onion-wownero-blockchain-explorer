@@ -120,6 +120,7 @@ set(LIBRARIES
         version
         epee
         pcsclite
+        sodium
         ${Boost_LIBRARIES}
         pthread
         unbound
