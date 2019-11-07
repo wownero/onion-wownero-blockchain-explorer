@@ -31,7 +31,7 @@
 set(LIBS common;blocks;cryptonote_basic;cryptonote_core;multisig;
 		cryptonote_protocol;daemonizer;mnemonics;epee;lmdb;device;
 		blockchain_db;ringct;wallet;cncrypto;easylogging;version;
-        checkpoints;randomx)
+        checkpoints;randomx;hardforks)
 
 set(Xmr_INCLUDE_DIRS "${CPP_MONERO_DIR}")
 
@@ -71,7 +71,9 @@ message(STATUS ${MONERO_SOURCE_DIR}/build)
 # include monero headers
 include_directories(
 		${MONERO_SOURCE_DIR}/src
+                ${MONERO_SOURCE_DIR}/src/crypto
 		${MONERO_SOURCE_DIR}/external
+		${MONERO_SOURCE_DIR}/external/randomx/src
 		${MONERO_SOURCE_DIR}/build
 		${MONERO_SOURCE_DIR}/external/easylogging++
 		${MONERO_SOURCE_DIR}/contrib/epee/include
